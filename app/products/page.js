@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import FluxMandala from '@/components/FluxMandala';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Tilt from '@/components/Tilt';
+import ClipReveal from '@/components/ClipReveal';
 import Parallax from '@/components/Parallax';
 import Marquee from '@/components/Marquee';
+import KineticStrip from '@/components/KineticStrip';
 import AppStoreButton from '@/components/AppStoreButton';
 import { MacWindow, PhoneFrame } from '@/components/DeviceFrame';
 import { IconArrow } from '@/components/Icons';
@@ -60,11 +63,10 @@ const APPS = [
     name: '5S Contact Manager',
     monogram: '5',
     platform: 'Google Sheets add-on',
-    status: 'live',
+    status: 'soon',
     icon: true,
     href: '/products/5s-contact-manager',
-    store: 'https://workspace.google.com/marketplace',
-    storeLabel: 'Workspace Marketplace',
+    store: '',
     tagline: 'Your Google Contacts, in a spreadsheet.',
     description:
       'Pull your whole contact list into a Google Sheet, keep an automatic backup, bulk-edit groups and details, then push it all back once you have reviewed exactly what changed.',
@@ -153,7 +155,7 @@ export default function ProductsPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">On the App Store</p>
-            <h2 className="head__title">Live now.</h2>
+            <SplitReveal as="h2" className="head__title" text="Live now." />
           </Reveal>
 
           {featured.map((app) => (
@@ -177,6 +179,7 @@ export default function ProductsPage() {
                 </div>
                 <div className="featapp__shot">
                   <Parallax speed={0.04}>
+                    <ClipReveal>
                     {app.media === 'phone' ? (
                       <div className="featapp__phones">
                         {app.shots.map((src, i) => (
@@ -190,6 +193,7 @@ export default function ProductsPage() {
                         <MacWindow src={app.shot} alt={`${app.name} on macOS`} title={app.name} priority />
                       </Tilt>
                     )}
+                    </ClipReveal>
                   </Parallax>
                 </div>
               </div>
@@ -205,16 +209,24 @@ export default function ProductsPage() {
         </Reveal>
       </section>
 
+      {/* -------- KINETIC BAND -------- */}
+      <section className="section section--tight">
+        <KineticStrip
+          words={['mailin', 'Antya Yuga', 'Kalsmritikosh', 'AI Camera Coach', '5S Contact Manager']}
+          speed={38}
+        />
+      </section>
+
       {/* -------- MORE APPS -------- */}
       <section className="section section--tight">
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">More from the studio</p>
-            <h2 className="head__title">The rest of the lineup.</h2>
+            <SplitReveal as="h2" className="head__title" text="The rest of the lineup." />
           </Reveal>
           <Stagger className="apps">
             {rest.map((app) => (
-              <article className="appcard" key={app.slug}>
+              <article className="appcard spot" key={app.slug}>
                 <AppIcon app={app} />
                 <div className="appcard__body">
                   <div className="appcard__head">
@@ -244,11 +256,11 @@ export default function ProductsPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Hardware &amp; focus areas</p>
-            <h2 className="head__title">Beyond the screen.</h2>
+            <SplitReveal as="h2" className="head__title" text="Beyond the screen." />
           </Reveal>
           <Stagger className="cardgrid">
             {HARDWARE.map((p) => (
-              <article className="card" key={p.title}>
+              <article className="card spot" key={p.title}>
                 <span className="card__tag">{p.tag}</span>
                 <h3 className="card__title">{p.title}</h3>
                 <p className="card__body">{p.body}</p>

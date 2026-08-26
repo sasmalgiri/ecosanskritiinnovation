@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Tilt from '@/components/Tilt';
+import ClipReveal from '@/components/ClipReveal';
 import Parallax from '@/components/Parallax';
 import Gallery from '@/components/Gallery';
 import StickyShowcase from '@/components/StickyShowcase';
+import AppStoreButton from '@/components/AppStoreButton';
 import { MacWindow } from '@/components/DeviceFrame';
 import { IconArrow } from '@/components/Icons';
 
@@ -13,8 +16,6 @@ export const metadata = {
   description:
     'A Google Sheets add-on that pulls your Google Contacts into a spreadsheet, backs them up automatically, lets you bulk-edit groups, and pushes the changes back once you have reviewed them.',
 };
-
-const MARKETPLACE = 'https://workspace.google.com/marketplace';
 
 /* Mirrors the documented menu flow: Extensions > 5S Contact Manager > ... */
 const TOUR = [
@@ -98,7 +99,7 @@ export default function FiveSPage() {
               <div className="applead__meta">
                 <span className="pill pill--platform">Google Sheets</span>
                 <span className="pill pill--platform">Workspace add-on</span>
-                <span className="pill badge--live">Live</span>
+                <span className="pill badge--soon">Coming soon</span>
               </div>
 
               <p className="applead__desc">
@@ -108,24 +109,24 @@ export default function FiveSPage() {
               </p>
 
               <div className="applead__actions">
-                <a className="btn btn--gold" href={MARKETPLACE} target="_blank" rel="noopener noreferrer">
-                  Google Workspace Marketplace <IconArrow className="btn__arrow" width="16" height="16" />
-                </a>
+                <AppStoreButton platform="Google Sheets" />
                 <Link href="/contact" className="btn btn--ghost">
-                  Ask a question <IconArrow className="btn__arrow" width="16" height="16" />
+                  Ask about early access <IconArrow className="btn__arrow" width="16" height="16" />
                 </Link>
               </div>
             </div>
 
             <Parallax speed={0.05}>
-              <Tilt max={6}>
+              <ClipReveal>
+                <Tilt max={6}>
                 <MacWindow
                   src="/app-shots/contact-manager/05-downloaded.webp"
                   alt="Google Contacts downloaded into a spreadsheet"
                   title="Google Sheets"
                   priority
                 />
-              </Tilt>
+                </Tilt>
+            </ClipReveal>
             </Parallax>
           </div>
         </div>
@@ -136,11 +137,11 @@ export default function FiveSPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Key features</p>
-            <h2 className="head__title">Four things, done properly.</h2>
+            <SplitReveal as="h2" className="head__title" text="Four things, done properly." />
           </Reveal>
           <Stagger className="featgrid">
             {CAPABILITIES.map((c) => (
-              <article className="featgrid__cell" key={c.title}>
+              <article className="featgrid__cell spot" key={c.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.06em' }}>{c.tag}</b>
                 </span>
@@ -157,7 +158,7 @@ export default function FiveSPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Start to finish</p>
-            <h2 className="head__title">What using it actually looks like.</h2>
+            <SplitReveal as="h2" className="head__title" text="What using it actually looks like." />
           </Reveal>
           <StickyShowcase steps={TOUR} windowTitle="Google Sheets" />
         </div>
@@ -168,7 +169,7 @@ export default function FiveSPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Every screen</p>
-            <h2 className="head__title">The whole flow, in ten shots.</h2>
+            <SplitReveal as="h2" className="head__title" text="The whole flow, in ten shots." />
           </Reveal>
           <Reveal>
             <Gallery images={GALLERY} columns={4} />
@@ -181,16 +182,16 @@ export default function FiveSPage() {
         <div className="wrap">
           <Reveal>
             <div className="cta">
-              <h2 className="cta__title">Install it from the Marketplace.</h2>
+              <SplitReveal as="h2" className="cta__title" text="Want it when it lands?" />
               <p className="cta__body">
-                Search for &ldquo;5S Contact Manager&rdquo; in the Google Workspace Marketplace,
-                grant it access to Contacts and Sheets, and it appears under
-                Extensions in any spreadsheet you open.
+                5S Contact Manager is not published yet. Tell us how big your contact list is and
+                what keeps going wrong with it, and we will let you know the moment it is live on
+                the Google Workspace Marketplace.
               </p>
               <div className="cta__actions">
-                <a className="btn btn--gold" href={MARKETPLACE} target="_blank" rel="noopener noreferrer">
-                  Open the Marketplace <IconArrow className="btn__arrow" width="16" height="16" />
-                </a>
+                <Link href="/contact" className="btn btn--gold magnet">
+                  Get in touch <IconArrow className="btn__arrow" width="16" height="16" />
+                </Link>
               </div>
             </div>
           </Reveal>

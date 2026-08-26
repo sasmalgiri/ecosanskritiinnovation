@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Tilt from '@/components/Tilt';
+import ClipReveal from '@/components/ClipReveal';
+import StackCards from '@/components/StackCards';
 import Parallax from '@/components/Parallax';
 import Counter from '@/components/Counter';
 import Gallery from '@/components/Gallery';
@@ -100,6 +103,7 @@ export default function AntyaYugaPage() {
             </div>
 
             <Parallax speed={0.06}>
+              <ClipReveal>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', alignItems: 'flex-start' }}>
                 <Tilt max={8} className="float float--slow">
                   <PhoneFrame src="/app-shots/antya-yuga/raceselect.webp" alt="Antya Yuga dynasty select" />
@@ -108,6 +112,7 @@ export default function AntyaYugaPage() {
                   <PhoneFrame src="/app-shots/antya-yuga/kalifight.webp" alt="Antya Yuga Kali Yuga boss fight" />
                 </Tilt>
               </div>
+              </ClipReveal>
             </Parallax>
           </div>
         </div>
@@ -119,7 +124,7 @@ export default function AntyaYugaPage() {
           <Reveal>
             <div className="statband">
               {STATS.map((s) => (
-                <div className="statband__cell" key={s.label}>
+                <div className="statband__cell spot" key={s.label}>
                   <span className="statband__num"><Counter to={s.to} suffix={s.suffix || ''} /></span>
                   <span className="statband__label">{s.label}</span>
                 </div>
@@ -134,11 +139,11 @@ export default function AntyaYugaPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Three Yugas, one fight</p>
-            <h2 className="head__title">Every run traverses the ages.</h2>
+            <SplitReveal as="h2" className="head__title" text="Every run traverses the ages." />
           </Reveal>
           <Stagger className="cardgrid">
             {YUGAS.map((y) => (
-              <article className="card" key={y.name}>
+              <article className="card spot" key={y.name}>
                 <span className="card__tag">{y.waves}</span>
                 <h3 className="card__title">{y.name}</h3>
                 <p className="card__body">{y.body}</p>
@@ -153,7 +158,7 @@ export default function AntyaYugaPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Screens</p>
-            <h2 className="head__title">Dense slot grids on iPhone, sweeping spirals on iPad.</h2>
+            <SplitReveal as="h2" className="head__title" text="Dense slot grids on iPhone, sweeping spirals on iPad." />
           </Reveal>
           <Reveal>
             <PhoneRail shots={SHOTS} />
@@ -174,17 +179,9 @@ export default function AntyaYugaPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">How a run unfolds</p>
-            <h2 className="head__title">Three decisions, thirteen waves, one ending.</h2>
+            <SplitReveal as="h2" className="head__title" text="Three decisions, thirteen waves, one ending." />
           </Reveal>
-          <Stagger className="cardgrid">
-            {RUN.map((r) => (
-              <article className="card" key={r.n}>
-                <span className="card__tag">{r.n}</span>
-                <h3 className="card__title">{r.title}</h3>
-                <p className="card__body">{r.body}</p>
-              </article>
-            ))}
-          </Stagger>
+          <StackCards items={RUN} />
         </div>
       </section>
 
@@ -193,11 +190,11 @@ export default function AntyaYugaPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">What lives inside</p>
-            <h2 className="head__title">A dharma epic in tower-defence clothing.</h2>
+            <SplitReveal as="h2" className="head__title" text="A dharma epic in tower-defence clothing." />
           </Reveal>
           <Stagger className="featgrid">
             {FEATURES.map((f) => (
-              <article className="featgrid__cell" key={f.title}>
+              <article className="featgrid__cell spot" key={f.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.66rem', letterSpacing: '0.06em' }}>{f.tag}</b>
                 </span>
@@ -214,7 +211,7 @@ export default function AntyaYugaPage() {
         <div className="wrap">
           <Reveal>
             <div className="cta">
-              <h2 className="cta__title">Hold the line in the last age.</h2>
+              <SplitReveal as="h2" className="cta__title" text="Hold the line in the last age." />
               <p className="cta__body">
                 Free to play, with no in-app purchases, no ads and no accounts. Download it and
                 see how far dharma carries you.

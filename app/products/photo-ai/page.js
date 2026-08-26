@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Parallax from '@/components/Parallax';
 import Counter from '@/components/Counter';
@@ -97,7 +98,7 @@ export default function PhotoAIPage() {
           <Reveal>
             <div className="statband">
               {STATS.map((s) => (
-                <div className="statband__cell" key={s.label}>
+                <div className="statband__cell spot" key={s.label}>
                   <span className="statband__num"><Counter to={s.to} /></span>
                   <span className="statband__label">{s.label}</span>
                 </div>
@@ -112,11 +113,11 @@ export default function PhotoAIPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Capture modes</p>
-            <h2 className="head__title">Six ways to point a camera.</h2>
+            <SplitReveal as="h2" className="head__title" text="Six ways to point a camera." />
           </Reveal>
           <Stagger className="cardgrid">
             {MODES.map((m) => (
-              <article className="card" key={m.name}>
+              <article className="card spot" key={m.name}>
                 <span className="card__tag">Mode</span>
                 <h3 className="card__title">{m.name}</h3>
                 <p className="card__body">{m.body}</p>
@@ -131,11 +132,11 @@ export default function PhotoAIPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">What it does</p>
-            <h2 className="head__title">Coaching at the moment it matters.</h2>
+            <SplitReveal as="h2" className="head__title" text="Coaching at the moment it matters." />
           </Reveal>
           <Stagger className="featgrid">
             {FEATURES.map((f) => (
-              <article className="featgrid__cell" key={f.title}>
+              <article className="featgrid__cell spot" key={f.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.66rem', letterSpacing: '0.06em' }}>{f.tag}</b>
                 </span>
@@ -153,14 +154,14 @@ export default function PhotoAIPage() {
           <Reveal>
             <div className="cta">
               <FluxMandala animated={false} className="cta__watermark" />
-              <h2 className="cta__title">Want it first?</h2>
+              <SplitReveal as="h2" className="cta__title" text="Want it first?" />
               <p className="cta__body">
                 AI Camera Coach is still in development, and there are no screenshots to show yet.
                 Leave us a note and we will tell you when there is a build worth putting on
                 your phone.
               </p>
               <div className="cta__actions">
-                <Link href="/contact" className="btn btn--gold">
+                <Link href="/contact" className="btn btn--gold magnet">
                   Get in touch <IconArrow className="btn__arrow" width="16" height="16" />
                 </Link>
               </div>

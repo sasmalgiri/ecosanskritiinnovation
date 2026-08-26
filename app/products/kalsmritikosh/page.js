@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Tilt from '@/components/Tilt';
+import ClipReveal from '@/components/ClipReveal';
 import Parallax from '@/components/Parallax';
 import Gallery from '@/components/Gallery';
 import Marquee from '@/components/Marquee';
@@ -123,9 +125,11 @@ export default function KalsmritikoshPage() {
             </div>
 
             <Parallax speed={0.05}>
-              <Tilt max={6}>
+              <ClipReveal>
+                <Tilt max={6}>
                 <MacWindow src={`${S}/ask.webp`} alt="Kalsmritikosh answering with cited evidence" title="Kalsmritikosh" priority />
-              </Tilt>
+                </Tilt>
+            </ClipReveal>
             </Parallax>
           </div>
         </div>
@@ -136,7 +140,7 @@ export default function KalsmritikoshPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">A guided look</p>
-            <h2 className="head__title">It does not chat with your files. It builds a ledger.</h2>
+            <SplitReveal as="h2" className="head__title" text="It does not chat with your files. It builds a ledger." />
           </Reveal>
           <StickyShowcase steps={TOUR} windowTitle="Kalsmritikosh" />
         </div>
@@ -147,11 +151,11 @@ export default function KalsmritikoshPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Built for serious work</p>
-            <h2 className="head__title">What is inside.</h2>
+            <SplitReveal as="h2" className="head__title" text="What is inside." />
           </Reveal>
           <Stagger className="featgrid">
             {FEATURES.map((f) => (
-              <article className="featgrid__cell" key={f.title}>
+              <article className="featgrid__cell spot" key={f.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.06em' }}>{f.tag}</b>
                 </span>
@@ -173,7 +177,7 @@ export default function KalsmritikoshPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Every screen</p>
-            <h2 className="head__title">Ten shots from the build.</h2>
+            <SplitReveal as="h2" className="head__title" text="Ten shots from the build." />
           </Reveal>
           <Reveal><Gallery images={GALLERY} columns={4} /></Reveal>
         </div>
@@ -184,13 +188,13 @@ export default function KalsmritikoshPage() {
         <div className="wrap">
           <Reveal>
             <div className="cta">
-              <h2 className="cta__title">Want an early build?</h2>
+              <SplitReveal as="h2" className="cta__title" text="Want an early build?" />
               <p className="cta__body">
                 Kalsmritikosh is still in development. Tell us what you work on and we will come
                 back to you when there is something worth putting on your Mac.
               </p>
               <div className="cta__actions">
-                <Link href="/contact" className="btn btn--gold">
+                <Link href="/contact" className="btn btn--gold magnet">
                   Get in touch <IconArrow className="btn__arrow" width="16" height="16" />
                 </Link>
               </div>

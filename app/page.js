@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import FluxMandala from '@/components/FluxMandala';
+import ScrollSpin from '@/components/ScrollSpin';
+import KineticStrip from '@/components/KineticStrip';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Gallery from '@/components/Gallery';
 import {
   IconMobility, IconCooling, IconDigital, IconUpcycle,
@@ -17,7 +20,7 @@ const CAPS = [
 const HOME_APPS = [
   { slug: 'mailin', icon: true, name: 'mailin', monogram: 'M', platform: 'macOS · iOS', status: 'live' },
   { slug: 'antya-yuga', icon: true, name: 'Antya Yuga', monogram: 'A', platform: 'iOS · macOS', status: 'live' },
-  { slug: '5s-contact-manager', icon: true, name: '5S Contact Manager', monogram: '5', platform: 'Google Sheets', status: 'live' },
+  { slug: '5s-contact-manager', icon: true, name: '5S Contact Manager', monogram: '5', platform: 'Google Sheets', status: 'soon' },
   { slug: 'kalsmritikosh', icon: true, name: 'Kalsmritikosh', monogram: 'K', platform: 'macOS', status: 'soon' },
   { slug: 'photo-ai', name: 'AI Camera Coach', monogram: 'C', platform: 'iOS 18+', status: 'soon' },
 ];
@@ -54,14 +57,16 @@ export default function HomePage() {
               the planet, starting today.
             </p>
             <div className="hero__actions">
-              <Link href="#hrim" className="btn btn--gold">
+              <Link href="#hrim" className="btn btn--gold magnet">
                 View the HRIM patent <IconArrow className="btn__arrow" width="16" height="16" />
               </Link>
               <Link href="/products" className="btn btn--ghost">Explore products</Link>
             </div>
           </div>
           <div className="hero__art">
-            <FluxMandala />
+            <ScrollSpin factor={0.05}>
+              <FluxMandala />
+            </ScrollSpin>
           </div>
         </div>
         <div className="hero__ticker">
@@ -112,7 +117,7 @@ export default function HomePage() {
           <Reveal>
             <div className="appstrip">
               {HOME_APPS.map((a) => (
-                <Link key={a.slug} href={`/products/${a.slug}`} className="appstrip__item">
+                <Link key={a.slug} href={`/products/${a.slug}`} className="appstrip__item spot">
                   <div className="appicon" aria-hidden={!a.icon}>
                     {a.icon ? <img src={`/app-icons/${a.slug}.webp`} alt="" /> : a.monogram}
                   </div>
@@ -129,7 +134,7 @@ export default function HomePage() {
       <section className="section section--tight" id="hrim">
         <div className="wrap">
           <Reveal>
-            <div className="sheet">
+            <div className="sheet spot">
               <div className="sheet__grid">
                 <div className="sheet__main">
                   <p className="eyebrow">Granted patent · India</p>
@@ -147,7 +152,7 @@ export default function HomePage() {
                     <li><span className="k">Date</span><span className="v">22 March 2023</span></li>
                     <li><span className="k">Jurisdiction</span><span className="v">India</span></li>
                   </ul>
-                  <a href="/patent-hrim-555489.pdf" className="btn btn--gold" target="_blank" rel="noopener noreferrer">
+                  <a href="/patent-hrim-555489.pdf" className="btn btn--gold magnet" target="_blank" rel="noopener noreferrer">
                     View full patent (PDF) <IconArrow className="btn__arrow" width="16" height="16" />
                   </a>
                 </div>
@@ -165,12 +170,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ---------- KINETIC BAND ---------- */}
+      <section className="section section--tight">
+        <KineticStrip
+          words={['Deep-tech', 'Regenerative', 'On-device', 'Patented in India', 'Private by default']}
+          speed={34}
+        />
+      </section>
+
       {/* ---------- MOTOR GALLERY ---------- */}
       <section className="section section--tight">
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">From the workshop</p>
-            <h2 className="head__title">The HRIM, on the bench.</h2>
+            <SplitReveal as="h2" className="head__title" text="The HRIM, on the bench." />
           </Reveal>
           <Reveal>
             <Gallery images={MOTOR_SHOTS} columns={4} />
@@ -230,7 +243,7 @@ export default function HomePage() {
                 investor, or student, there’s a place for you at EcoSanskriti Innovations.
               </p>
               <div className="cta__actions">
-                <Link href="/products" className="btn btn--gold">Explore projects</Link>
+                <Link href="/products" className="btn btn--gold magnet">Explore projects</Link>
                 <Link href="/contact" className="btn btn--ghost">Contact us</Link>
               </div>
             </div>

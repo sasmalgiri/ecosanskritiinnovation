@@ -1137,3 +1137,177 @@ img { max-width: 100%; display: block; }
 .featapp__phones { display: flex; gap: 1rem; justify-content: center; align-items: flex-start; }
 .featapp__phones .phone { max-width: 190px; }
 @media (max-width: 520px) { .featapp__phones .phone:nth-child(2) { display: none; } }
+
+/* ============================================================
+   HEAVY MOTION LAYER
+   Split headings, magnetic actions, cursor spotlights, clip
+   wipes, kinetic type, sticky decks and film grain.
+   ============================================================ */
+
+/* ---- word-by-word heading reveal ------------------------- */
+.splitrev__mask {
+  display: inline-block; overflow: hidden; vertical-align: bottom;
+  padding-bottom: 0.08em; margin-right: 0.26em;
+}
+.js .splitrev__word {
+  display: inline-block; transform: translateY(115%); opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease;
+  will-change: transform;
+}
+.js .splitrev.is-in .splitrev__word { transform: none; opacity: 1; }
+
+/* ---- magnetic actions ------------------------------------ */
+.magnetic {
+  display: inline-block;
+  transform: translate3d(var(--tx, 0), var(--ty, 0), 0);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* ---- cursor spotlight on cards --------------------------- */
+.spot { position: relative; overflow: hidden; }
+.spot::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  opacity: 0; transition: opacity 0.32s ease;
+  background: radial-gradient(240px circle at var(--sx, 50%) var(--sy, 50%),
+              rgba(216, 165, 33, 0.17), transparent 68%);
+}
+.spot:hover::after { opacity: 1; }
+.spot > * { position: relative; z-index: 1; }
+
+/* ---- clip wipe + sheen ----------------------------------- */
+.clipreveal { position: relative; }
+.js .clipreveal {
+  clip-path: inset(0 0 100% 0); opacity: 0;
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+}
+.js .clipreveal.is-in { clip-path: inset(0 0 0 0); opacity: 1; }
+.clipreveal__sheen {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 2;
+  background: linear-gradient(105deg, transparent 42%, rgba(236, 198, 95, 0.34) 50%, transparent 58%);
+}
+.js .clipreveal.is-in .clipreveal__sheen { animation: sheen 1.15s ease 0.3s 1 both; }
+@keyframes sheen {
+  0%   { opacity: 0; transform: translateX(-100%); }
+  25%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+/* ---- marquee leans into scroll --------------------------- */
+/* The skew lives on a wrapper because .marquee__track's slide animation
+   already owns its transform, and an animation always wins. */
+.marquee__skew {
+  transform: skewY(var(--skew, 0deg)) translateX(var(--shove, 0px));
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+/* ---- kinetic type band ----------------------------------- */
+.kinetic {
+  overflow: hidden; padding: clamp(0.9rem, 2.5vw, 1.8rem) 0;
+  border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line);
+}
+.kinetic__track { display: flex; width: max-content; align-items: center; animation: slide linear infinite; }
+.kinetic__word {
+  display: inline-flex; align-items: center; white-space: nowrap;
+  font-family: var(--font-display); font-weight: 500; letter-spacing: -0.02em;
+  font-size: clamp(2rem, 6.5vw, 4.6rem); color: var(--ink);
+}
+.kinetic__word:nth-child(even) {
+  color: transparent; -webkit-text-stroke: 1px var(--paper-line);
+}
+.kinetic__sep {
+  flex: 0 0 auto; width: 11px; height: 11px; transform: rotate(45deg);
+  background: var(--haldi); margin: 0 clamp(0.9rem, 2.6vw, 2.2rem);
+}
+.kinetic:hover .kinetic__track { animation-play-state: paused; }
+.kinetic[data-frozen] .kinetic__track { animation: none; }
+
+/* ---- sticky stacking deck -------------------------------- */
+.stackcards { display: flex; flex-direction: column; gap: 1.1rem; padding-bottom: 30vh; }
+.stackcards__card {
+  position: sticky; display: flex; gap: clamp(0.9rem, 2vw, 1.4rem); align-items: flex-start;
+  background: var(--paper); border: 1px solid var(--paper-line); border-radius: 12px;
+  padding: clamp(1.35rem, 3vw, 2.1rem);
+  box-shadow: 0 20px 44px -28px rgba(10, 39, 29, 0.5);
+}
+.stackcards__num {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.12em;
+  color: var(--haldi); padding-top: 0.4rem; flex: 0 0 auto;
+}
+.stackcards__title {
+  font-family: var(--font-display); font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+  margin: 0 0 0.4rem; color: var(--ink);
+}
+.stackcards__body { margin: 0; color: var(--ink-soft); line-height: 1.65; }
+
+/* ---- scroll-linked rotation ------------------------------ */
+.scrollspin { transform: rotate(var(--spin, 0deg)); will-change: transform; }
+
+/* ---- film grain ------------------------------------------ */
+.grain {
+  position: fixed; inset: -60px; z-index: 55; pointer-events: none;
+  opacity: 0.038; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: grainshift 0.9s steps(5) infinite;
+}
+@keyframes grainshift {
+  0%   { transform: translate3d(0, 0, 0); }
+  20%  { transform: translate3d(-8px, 5px, 0); }
+  40%  { transform: translate3d(6px, -7px, 0); }
+  60%  { transform: translate3d(-5px, -4px, 0); }
+  80%  { transform: translate3d(7px, 6px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* ---- shimmering accent type ------------------------------ */
+.applead__title em {
+  background: linear-gradient(100deg, var(--haldi) 0%, var(--haldi-soft) 28%, #fff4d2 44%, var(--haldi-soft) 62%, var(--haldi) 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: shimmer 6.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* ---- live badge heartbeat -------------------------------- */
+.badge--live::before {
+  content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80; margin-right: 7px; vertical-align: middle;
+  animation: pulse-dot 2.2s ease-out infinite;
+}
+@keyframes pulse-dot {
+  0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+/* ---- press feedback -------------------------------------- */
+.btn:active, .appstore:active { transform: translateY(1px) scale(0.985); }
+
+/* ============================================================
+   MOTION OFF — heavy layer. Same switch, everything above it.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .js .splitrev__word { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .magnetic { transform: none !important; transition: none !important; }
+  .spot::after { display: none; }
+  .js .clipreveal { clip-path: none !important; opacity: 1 !important; transition: none !important; }
+  .clipreveal__sheen { display: none; }
+  .marquee__skew { transform: none !important; transition: none !important; }
+  .kinetic__track { animation: none !important; }
+  .scrollspin { transform: none !important; }
+  .grain { display: none; }
+  .applead__title em {
+    background: none; -webkit-text-fill-color: var(--haldi); color: var(--haldi);
+    animation: none !important;
+  }
+  .badge--live::before { animation: none !important; box-shadow: none !important; }
+  .stackcards { padding-bottom: 0; }
+  .stackcards__card { position: static; }
+  .btn:active, .appstore:active { transform: none; }
+}

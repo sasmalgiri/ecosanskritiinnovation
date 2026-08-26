@@ -3,6 +3,8 @@ import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
+import SpotlightRoot from '@/components/Spotlight';
+import MagneticRoot from '@/components/Magnetic';
 
 const display = Fraunces({
   subsets: ['latin'],
@@ -80,6 +82,9 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
         />
         <ScrollProgress />
+        <div className="grain" aria-hidden="true" />
+        <SpotlightRoot />
+        <MagneticRoot />
         <Nav />
         <main>{children}</main>
         <Footer />

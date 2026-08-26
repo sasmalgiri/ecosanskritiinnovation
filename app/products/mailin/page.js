@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
+import SplitReveal from '@/components/SplitReveal';
 import Stagger from '@/components/Stagger';
 import Tilt from '@/components/Tilt';
+import ClipReveal from '@/components/ClipReveal';
 import Parallax from '@/components/Parallax';
 import Counter from '@/components/Counter';
 import Marquee from '@/components/Marquee';
@@ -126,14 +128,16 @@ export default function MailinPage() {
             </div>
 
             <Parallax speed={0.05}>
-              <Tilt max={6}>
+              <ClipReveal>
+                <Tilt max={6}>
                 <MacWindow
                   src="/app-shots/mailin/hero.webp"
                   alt="mailin running on macOS"
                   title="mailin"
                   priority
                 />
-              </Tilt>
+                </Tilt>
+            </ClipReveal>
             </Parallax>
           </div>
         </div>
@@ -145,7 +149,7 @@ export default function MailinPage() {
           <Reveal>
             <div className="statband">
               {STATS.map((s) => (
-                <div className="statband__cell" key={s.label}>
+                <div className="statband__cell spot" key={s.label}>
                   <span className="statband__num"><Counter to={s.to} /></span>
                   <span className="statband__label">{s.label}</span>
                 </div>
@@ -160,7 +164,7 @@ export default function MailinPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">A guided look</p>
-            <h2 className="head__title">Six things it does that nothing else does together.</h2>
+            <SplitReveal as="h2" className="head__title" text="Six things it does that nothing else does together." />
           </Reveal>
           <StickyShowcase steps={TOUR} windowTitle="mailin" />
         </div>
@@ -171,11 +175,11 @@ export default function MailinPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">Under the hood</p>
-            <h2 className="head__title">Everything else it carries.</h2>
+            <SplitReveal as="h2" className="head__title" text="Everything else it carries." />
           </Reveal>
           <Stagger className="featgrid">
             {FEATURES.map((f) => (
-              <article className="featgrid__cell" key={f.title}>
+              <article className="featgrid__cell spot" key={f.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.06em' }}>{f.tag}</b>
                 </span>
@@ -192,7 +196,7 @@ export default function MailinPage() {
         <div className="wrap">
           <Reveal className="head">
             <p className="eyebrow eyebrow--ink">iPhone &amp; iPad</p>
-            <h2 className="head__title">The same archive, in your pocket.</h2>
+            <SplitReveal as="h2" className="head__title" text="The same archive, in your pocket." />
           </Reveal>
           <Reveal>
             <PhoneRail shots={IOS_SHOTS} />
@@ -212,7 +216,7 @@ export default function MailinPage() {
         <div className="wrap">
           <Reveal>
             <div className="cta">
-              <h2 className="cta__title">Start with 500 emails, free.</h2>
+              <SplitReveal as="h2" className="cta__title" text="Start with 500 emails, free." />
               <p className="cta__body">
                 No account, no telemetry, no upload. Import an archive and see what a decade of
                 your own correspondence actually looks like.
