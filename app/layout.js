@@ -2,6 +2,7 @@ import './globals.css';
 import { Fraunces, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import ScrollProgress from '@/components/ScrollProgress';
 
 const display = Fraunces({
   subsets: ['latin'],
@@ -78,6 +79,7 @@ export default function RootLayout({ children }) {
         <script
           dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
         />
+        <ScrollProgress />
         <Nav />
         <main>{children}</main>
         <Footer />

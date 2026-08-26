@@ -2,7 +2,9 @@ const SITE = 'https://ecosanskritiinnovations.co.in';
 
 export default function sitemap() {
   const routes = [
-    '', '/products', '/products/5s-contact-manager', '/founder', '/contact',
+    '', '/products',
+    '/products/mailin', '/products/antya-yuga', '/products/5s-contact-manager',
+    '/products/kalsmritikosh', '/products/photo-ai', '/founder', '/contact',
     '/legal/terms', '/legal/privacy', '/legal/eula',
   ];
   const now = new Date();

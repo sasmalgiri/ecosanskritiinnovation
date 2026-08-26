@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import FluxMandala from '@/components/FluxMandala';
 import Reveal from '@/components/Reveal';
+import Gallery from '@/components/Gallery';
 import {
   IconMobility, IconCooling, IconDigital, IconUpcycle,
   IconArrow, IconCheck, IconPlay,
@@ -14,10 +15,26 @@ const CAPS = [
 ];
 
 const HOME_APPS = [
-  { slug: 'mailin', name: 'Mailin', monogram: 'M', platform: 'macOS', status: 'live' },
+  { slug: 'mailin', icon: true, name: 'mailin', monogram: 'M', platform: 'macOS · iOS', status: 'live' },
+  { slug: 'antya-yuga', icon: true, name: 'Antya Yuga', monogram: 'A', platform: 'iOS · macOS', status: 'live' },
+  { slug: '5s-contact-manager', icon: true, name: '5S Contact Manager', monogram: '5', platform: 'Google Sheets', status: 'live' },
   { slug: 'kalsmritikosh', name: 'Kalsmritikosh', monogram: 'K', platform: 'macOS', status: 'soon' },
-  { slug: 'antya-yuga', name: 'Antya Yuga', monogram: 'A', platform: 'iOS', status: 'soon' },
   { slug: 'photo-ai', name: 'Photo AI', monogram: 'P', platform: 'iOS', status: 'soon' },
+];
+
+const MOTOR_SHOTS = [
+    { src: '/motor/motor-01.webp', alt: 'HRIM motor prototype in the workshop — view 1' },
+    { src: '/motor/motor-02.webp', alt: 'HRIM motor prototype in the workshop — view 2' },
+    { src: '/motor/motor-03.webp', alt: 'HRIM motor prototype in the workshop — view 3' },
+    { src: '/motor/motor-04.webp', alt: 'HRIM motor prototype in the workshop — view 4' },
+    { src: '/motor/motor-05.webp', alt: 'HRIM motor prototype in the workshop — view 5' },
+    { src: '/motor/motor-06.webp', alt: 'HRIM motor prototype in the workshop — view 6' },
+    { src: '/motor/motor-07.webp', alt: 'HRIM motor prototype in the workshop — view 7' },
+    { src: '/motor/motor-08.webp', alt: 'HRIM motor prototype in the workshop — view 8' },
+    { src: '/motor/motor-09.webp', alt: 'HRIM motor prototype in the workshop — view 9' },
+    { src: '/motor/motor-10.webp', alt: 'HRIM motor prototype in the workshop — view 10' },
+    { src: '/motor/motor-11.webp', alt: 'HRIM motor prototype in the workshop — view 11' },
+    { src: '/motor/motor-12.webp', alt: 'HRIM motor prototype in the workshop — view 12' },
 ];
 
 export default function HomePage() {
@@ -95,8 +112,10 @@ export default function HomePage() {
           <Reveal>
             <div className="appstrip">
               {HOME_APPS.map((a) => (
-                <Link key={a.slug} href="/products" className="appstrip__item">
-                  <div className="appicon" aria-hidden="true">{a.monogram}</div>
+                <Link key={a.slug} href={`/products/${a.slug}`} className="appstrip__item">
+                  <div className="appicon" aria-hidden={!a.icon}>
+                    {a.icon ? <img src={`/app-icons/${a.slug}.webp`} alt="" /> : a.monogram}
+                  </div>
                   <span className="appstrip__name">{a.name}</span>
                   <span className="appstrip__plat">{a.platform}{a.status === 'soon' ? ' · Soon' : ''}</span>
                 </Link>
@@ -128,12 +147,6 @@ export default function HomePage() {
                     <li><span className="k">Date</span><span className="v">22 March 2023</span></li>
                     <li><span className="k">Jurisdiction</span><span className="v">India</span></li>
                   </ul>
-                  {/*
-                    NOTE: Download your patent PDF from the current site
-                    (…/wp-content/uploads/2025/04/patent-complete-spf.pdf),
-                    rename it, and drop it into /public as patent-hrim-555489.pdf
-                    so this link works after you leave WordPress.
-                  */}
                   <a href="/patent-hrim-555489.pdf" className="btn btn--gold" target="_blank" rel="noopener noreferrer">
                     View full patent (PDF) <IconArrow className="btn__arrow" width="16" height="16" />
                   </a>
@@ -148,6 +161,19 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- MOTOR GALLERY ---------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <Reveal className="head">
+            <p className="eyebrow eyebrow--ink">From the workshop</p>
+            <h2 className="head__title">The HRIM, on the bench.</h2>
+          </Reveal>
+          <Reveal>
+            <Gallery images={MOTOR_SHOTS} columns={4} />
           </Reveal>
         </div>
       </section>
