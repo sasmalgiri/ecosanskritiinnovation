@@ -1311,3 +1311,18 @@ img { max-width: 100%; display: block; }
   .stackcards__card { position: static; }
   .btn:active, .appstore:active { transform: none; }
 }
+
+/* ---- featured media must fill its panel ------------------ */
+/* .featapp__shot centres its grid item, which makes every wrapper in the
+   chain shrink-to-fit. Without this the device frame can collapse. */
+.featapp__shot > .parallax,
+.featapp__shot .clipreveal,
+.featapp__shot .tilt,
+.featapp__shot .tilt__inner { width: 100%; }
+.featapp__shot .macwin { width: 100%; }
+.featapp__shot .featapp__phones { width: 100%; }
+
+/* Same guarantee for the app-page hero media. */
+.applead__grid .clipreveal,
+.applead__grid .tilt,
+.applead__grid .tilt__inner { width: 100%; }
