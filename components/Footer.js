@@ -37,7 +37,7 @@ export default function Footer() {
 
         <div className="footer__bar">
           <span>© {new Date().getFullYear()} EcoSanskriti Innovations (OPC) Pvt. Ltd.</span>
-          <span>contact@ecosanskritiinnovations.co.in</span>
+          <span>sasmalgiri@gmail.com</span>
         </div>
       </div>
     </footer>

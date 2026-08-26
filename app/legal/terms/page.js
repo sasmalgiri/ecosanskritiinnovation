@@ -70,7 +70,7 @@ export default function TermsPage() {
           <h2>8. Contact</h2>
           <p>
             Questions about these Terms? Email{' '}
-            <a href="mailto:contact@ecosanskritiinnovations.co.in">contact@ecosanskritiinnovations.co.in</a>.
+            <a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a>.
           </p>
         </div>
       </section>

@@ -1,27 +1,91 @@
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import Stagger from '@/components/Stagger';
+import Tilt from '@/components/Tilt';
 import Parallax from '@/components/Parallax';
-import FluxMandala from '@/components/FluxMandala';
+import Gallery from '@/components/Gallery';
+import Marquee from '@/components/Marquee';
+import StickyShowcase from '@/components/StickyShowcase';
 import AppStoreButton from '@/components/AppStoreButton';
+import { MacWindow } from '@/components/DeviceFrame';
 import { IconArrow } from '@/components/Icons';
 
 export const metadata = {
-  title: 'Kalsmritikosh — a private, on-device knowledge vault for Mac',
+  title: 'Kalsmritikosh — a private evidence workbench for macOS',
   description:
-    'A personal knowledge system that keeps everything you know on your own Mac. Capture, connect and recall your notes and documents — private by design, working even offline. In development.',
+    'Turn your document and email archive into answers you can trust — timelines, dossiers and cited datasets, every claim traced to its source. Runs entirely on your Mac. In development.',
 };
 
-const PLANNED = [
-  { tag: 'CAP', title: 'Capture without friction', body: 'Notes, documents and clippings land in one place instead of scattering across folders, apps and downloads.' },
-  { tag: 'LNK', title: 'Connect what belongs together', body: 'Ideas link to the documents that produced them, so recall follows the shape of your own thinking rather than a folder tree.' },
-  { tag: 'FND', title: 'Recall in a keystroke', body: 'Search that reaches inside your documents, not just their filenames.' },
-  { tag: 'OFF', title: 'Works with the wifi off', body: 'A vault that depends on a server is a vault someone else holds. This one lives on your Mac and opens whether or not you are online.' },
+const S = '/app-shots/kalsmritikosh';
+
+/* Captions follow the repo's own shot list, kept to what each screen shows. */
+const TOUR = [
+  {
+    title: 'Ask, and see the evidence',
+    body: 'Ask in plain language and get an answer that cites its sources, grades its own confidence, and says plainly where the gaps are. Conflicts between documents are shown side by side rather than averaged away.',
+    src: `${S}/ask.webp`,
+    alt: 'Kalsmritikosh answering a question with cited evidence',
+  },
+  {
+    title: 'A timeline it builds for you',
+    body: 'Dated events are extracted across the whole archive and assembled into a real timeline — not a chat log, but a ledger of what happened and when, with each entry anchored to the document it came from.',
+    src: `${S}/timeline.webp`,
+    alt: 'Reconstructed timeline of dated events',
+  },
+  {
+    title: 'The knowledge ledger',
+    body: 'People, events and the relationships between them are extracted into a structured store, so the archive becomes something you can query rather than something you have to remember.',
+    src: `${S}/knowledge.webp`,
+    alt: 'The structured knowledge ledger',
+  },
+  {
+    title: 'Every claim, traced',
+    body: 'Layered citations run all the way down to the originating file. Drill into any cell, any fact, any figure, and the source is right there — with file authenticity signals and email threading alongside it.',
+    src: `${S}/sources.webp`,
+    alt: 'Sources and citations behind a claim',
+  },
+  {
+    title: 'Bring in what you already have',
+    body: 'Documents and email archives are converted and ingested into the same evidence base, so material that arrived in a dozen formats ends up answerable in one place.',
+    src: `${S}/convert.webp`,
+    alt: 'Converting and ingesting documents',
+  },
+  {
+    title: 'Workflows for real jobs',
+    body: 'The Professional Work Center runs step-by-step workflows for specific kinds of work, with gated steps and guidance, instead of leaving you to invent a process from a blank window.',
+    src: `${S}/professional-jobs.webp`,
+    alt: 'The Professional Work Center persona picker',
+  },
 ];
+
+const FEATURES = [
+  { tag: 'ASK', title: 'Answers with an evidence gate', body: 'Specialist experts sit behind a gate that will not let an answer through without the sources to support it. Every claim carries what it rests on.' },
+  { tag: 'LAB', title: 'DataLab', body: 'Build cited datasets over your evidence, or generate them from what you have ingested — timelines, people, payments, communications, conflicts, missing evidence. Every cell drills back to its source.' },
+  { tag: 'RED', title: 'Real redaction', body: 'Redaction that actually removes the text, rather than drawing a black box over something still sitting in the file underneath.' },
+  { tag: 'FLW', title: 'Fund flow', body: 'A payer-to-payee view with a ranked flow list, for when the question is where the money went rather than what the document said.' },
+  { tag: 'DEV', title: 'Fully on-device', body: 'Your documents, the knowledge built from them, and the questions you ask never leave your Mac. No analytics, no telemetry, no cloud processing. Remove the app data and it is all gone.' },
+  { tag: 'HON', title: 'Honest by design', body: 'It shows what is proven, what is inferred and what is missing — and tells you when it is not sure. A tool, explicitly not professional advice.' },
+];
+
+const GALLERY = [
+  { src: `${S}/ask.webp`, alt: 'Asking a question with cited evidence' },
+  { src: `${S}/timeline.webp`, alt: 'Reconstructed timeline' },
+  { src: `${S}/insights.webp`, alt: 'Insights across the archive' },
+  { src: `${S}/knowledge.webp`, alt: 'The knowledge ledger' },
+  { src: `${S}/sources.webp`, alt: 'Sources behind a claim' },
+  { src: `${S}/search.webp`, alt: 'Searching the archive' },
+  { src: `${S}/convert.webp`, alt: 'Converting and ingesting documents' },
+  { src: `${S}/live.webp`, alt: 'What changed as new documents arrive' },
+  { src: `${S}/settings.webp`, alt: 'Privacy settings — on-device by design' },
+  { src: `${S}/professional-jobs.webp`, alt: 'Professional Work Center' },
+];
+
+const STRIP = GALLERY.slice(0, 7);
 
 export default function KalsmritikoshPage() {
   return (
     <>
+      {/* -------- HERO -------- */}
       <section className="applead aurora">
         <div className="wrap">
           <p className="applead__crumb">
@@ -30,51 +94,63 @@ export default function KalsmritikoshPage() {
 
           <div className="applead__grid">
             <div>
-              <div className="applead__icon" style={{ display: 'grid', placeItems: 'center', background: 'var(--pine)', fontFamily: 'var(--font-display)', fontSize: '2.4rem', color: 'var(--haldi)' }}>
-                K
+              <div className="applead__icon">
+                <img src="/app-icons/kalsmritikosh.webp" alt="" width="84" height="84" />
               </div>
 
               <h1 className="applead__title">Kal<em>smritikosh</em></h1>
-              <p className="applead__tagline">Your private, on-device knowledge vault.</p>
+              <p className="applead__tagline">A private evidence workbench.</p>
 
               <div className="applead__meta">
-                <span className="pill pill--platform">macOS</span>
+                <span className="pill pill--platform">macOS 15+</span>
+                <span className="pill pill--platform">Apple-native</span>
                 <span className="pill badge--soon">In development</span>
               </div>
 
               <p className="applead__desc">
-                A personal knowledge system that keeps everything you know on your own Mac.
-                Capture, connect and recall your notes and documents &mdash; private by design,
-                and working even with the network off.
+                Turn your whole document and email archive into answers you can trust &mdash;
+                timelines, dossiers, datasets &mdash; with every fact cited to its source.
+                It builds a real ledger of people, dated events and relationships, and runs
+                entirely on your Mac.
               </p>
 
               <div className="applead__actions">
                 <AppStoreButton platform="macOS" />
                 <Link href="/contact" className="btn btn--ghost">
-                  Tell us what you need <IconArrow className="btn__arrow" width="16" height="16" />
+                  Ask about early access <IconArrow className="btn__arrow" width="16" height="16" />
                 </Link>
               </div>
             </div>
 
             <Parallax speed={0.05}>
-              <div className="float float--slow" style={{ display: "grid", placeItems: "center", minHeight: "260px" }}>
-                <div style={{ width: "100%", maxWidth: "340px", opacity: 0.9 }}>
-                  <FluxMandala animated />
-                </div>
-              </div>
+              <Tilt max={6}>
+                <MacWindow src={`${S}/ask.webp`} alt="Kalsmritikosh answering with cited evidence" title="Kalsmritikosh" priority />
+              </Tilt>
             </Parallax>
           </div>
         </div>
       </section>
 
+      {/* -------- TOUR -------- */}
       <section className="section">
         <div className="wrap">
           <Reveal className="head">
-            <p className="eyebrow eyebrow--ink">What we are building</p>
-            <h2 className="head__title">The shape it is taking.</h2>
+            <p className="eyebrow eyebrow--ink">A guided look</p>
+            <h2 className="head__title">It does not chat with your files. It builds a ledger.</h2>
+          </Reveal>
+          <StickyShowcase steps={TOUR} windowTitle="Kalsmritikosh" />
+        </div>
+      </section>
+
+      {/* -------- FEATURES -------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <Reveal className="head">
+            <p className="eyebrow eyebrow--ink">Built for serious work</p>
+            <h2 className="head__title">What is inside.</h2>
           </Reveal>
           <Stagger className="featgrid">
-            {PLANNED.map((f) => (
+            {FEATURES.map((f) => (
               <article className="featgrid__cell" key={f.title}>
                 <span className="featgrid__ico">
                   <b style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', letterSpacing: '0.06em' }}>{f.tag}</b>
@@ -87,15 +163,31 @@ export default function KalsmritikoshPage() {
         </div>
       </section>
 
+      {/* -------- STRIP -------- */}
+      <section className="section section--tight">
+        <Reveal><Marquee items={STRIP} speed={56} /></Reveal>
+      </section>
+
+      {/* -------- GALLERY -------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <Reveal className="head">
+            <p className="eyebrow eyebrow--ink">Every screen</p>
+            <h2 className="head__title">Ten shots from the build.</h2>
+          </Reveal>
+          <Reveal><Gallery images={GALLERY} columns={4} /></Reveal>
+        </div>
+      </section>
+
+      {/* -------- CTA -------- */}
       <section className="section section--tight">
         <div className="wrap">
           <Reveal>
             <div className="cta">
-              <FluxMandala animated={false} className="cta__watermark" />
               <h2 className="cta__title">Want an early build?</h2>
               <p className="cta__body">
-                Kalsmritikosh is still being built. Tell us how you work and what you would want
-                from it, and we will come back to you when there is something to try.
+                Kalsmritikosh is still in development. Tell us what you work on and we will come
+                back to you when there is something worth putting on your Mac.
               </p>
               <div className="cta__actions">
                 <Link href="/contact" className="btn btn--gold">

@@ -6,7 +6,7 @@ import Tilt from '@/components/Tilt';
 import Parallax from '@/components/Parallax';
 import Marquee from '@/components/Marquee';
 import AppStoreButton from '@/components/AppStoreButton';
-import { MacWindow } from '@/components/DeviceFrame';
+import { MacWindow, PhoneFrame } from '@/components/DeviceFrame';
 import { IconArrow } from '@/components/Icons';
 
 export const metadata = {
@@ -31,6 +31,7 @@ const APPS = [
     status: 'live',
     icon: true,
     featured: true,
+    media: 'mac',
     href: '/products/mailin',
     store: 'https://apps.apple.com/app/mailin/id6767245397',
     tagline: 'Email Archive Analyzer.',
@@ -45,8 +46,11 @@ const APPS = [
     platform: 'iPhone · iPad · macOS',
     status: 'live',
     icon: true,
+    featured: true,
+    media: 'phone',
     href: '/products/antya-yuga',
     store: 'https://apps.apple.com/app/antya-yuga/id6783359423',
+    shots: ['/app-shots/antya-yuga/raceselect.webp', '/app-shots/antya-yuga/kalifight.webp'],
     tagline: 'Hold the line in the last age of myth.',
     description:
       'A tower defence rooted in Indian itihasa. Three Yugas, nine dynasties, thirty divine astras, and one spinning Sudarshana Chakra between dharma and Kali. Free to play, no in-app purchases, no tracking.',
@@ -69,27 +73,27 @@ const APPS = [
     slug: 'kalsmritikosh',
     name: 'Kalsmritikosh',
     monogram: 'K',
-    platform: 'macOS',
+    platform: 'macOS 15+',
     status: 'soon',
-    icon: false,
+    icon: true,
     href: '/products/kalsmritikosh',
     store: '',
-    tagline: 'Your private, on-device knowledge vault.',
+    tagline: 'A private evidence workbench.',
     description:
-      'A personal knowledge system that keeps everything you know on your own Mac. Capture, connect and recall your notes and documents — private by design, working even offline.',
+      'Turns your document and email archive into a structured, answerable knowledge base — timelines, dossiers and cited datasets, every claim traced to its source. Runs entirely on your Mac.',
   },
   {
     slug: 'photo-ai',
-    name: 'Photo AI',
-    monogram: 'P',
-    platform: 'iOS',
+    name: 'AI Camera Coach',
+    monogram: 'C',
+    platform: 'iOS 18+',
     status: 'soon',
     icon: false,
     href: '/products/photo-ai',
     store: '',
-    tagline: 'Studio-grade photo magic, on your phone.',
+    tagline: 'Take pro-looking photos without learning photography.',
     description:
-      'Turn everyday photos into polished, share-ready images with on-device AI — clean up, enhance and restyle in a tap, with your pictures staying on your device.',
+      'An iOS camera app pairing an AI Coach that tells you what to do with an AI Photographer that decides when to fire the shutter. Live 0-100 scoring, six capture modes, and seven Vision experts running on-device.',
   },
 ];
 
@@ -127,7 +131,7 @@ function AppIcon({ app }) {
 }
 
 export default function ProductsPage() {
-  const featured = APPS.find((a) => a.featured);
+  const featured = APPS.filter((a) => a.featured);
   const rest = APPS.filter((a) => !a.featured);
 
   return (
@@ -144,44 +148,55 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* -------- FEATURED APP -------- */}
-      {featured && (
-        <section className="section">
-          <div className="wrap">
-            <Reveal className="head">
-              <p className="eyebrow eyebrow--ink">On the App Store</p>
-              <h2 className="head__title">Featured app.</h2>
-            </Reveal>
-            <Reveal>
+      {/* -------- LIVE APPS -------- */}
+      <section className="section">
+        <div className="wrap">
+          <Reveal className="head">
+            <p className="eyebrow eyebrow--ink">On the App Store</p>
+            <h2 className="head__title">Live now.</h2>
+          </Reveal>
+
+          {featured.map((app) => (
+            <Reveal key={app.slug}>
               <div className="featapp">
                 <div className="featapp__main">
                   <div className="featapp__head">
-                    <AppIcon app={featured} />
-                    <span className="pill pill--platform">{featured.platform}</span>
+                    <AppIcon app={app} />
+                    <span className="pill pill--platform">{app.platform}</span>
                     <span className="pill badge--live">Live</span>
                   </div>
-                  <h3 className="featapp__name">{featured.name}</h3>
-                  <p className="featapp__tagline">{featured.tagline}</p>
-                  <p className="featapp__desc">{featured.description}</p>
+                  <h3 className="featapp__name">{app.name}</h3>
+                  <p className="featapp__tagline">{app.tagline}</p>
+                  <p className="featapp__desc">{app.description}</p>
                   <div className="applead__actions">
-                    <AppStoreButton url={featured.store} />
-                    <Link href={featured.href} className="btn btn--ghost">
+                    <AppStoreButton url={app.store} />
+                    <Link href={app.href} className="btn btn--ghost">
                       Full tour <IconArrow className="btn__arrow" width="16" height="16" />
                     </Link>
                   </div>
                 </div>
                 <div className="featapp__shot">
                   <Parallax speed={0.04}>
-                    <Tilt max={6}>
-                      <MacWindow src={featured.shot} alt={`${featured.name} on macOS`} title={featured.name} priority />
-                    </Tilt>
+                    {app.media === 'phone' ? (
+                      <div className="featapp__phones">
+                        {app.shots.map((src, i) => (
+                          <Tilt max={8} key={src} className={i === 1 ? 'float float--slow float--offset' : 'float float--slow'}>
+                            <PhoneFrame src={src} alt={`${app.name} screenshot`} />
+                          </Tilt>
+                        ))}
+                      </div>
+                    ) : (
+                      <Tilt max={6}>
+                        <MacWindow src={app.shot} alt={`${app.name} on macOS`} title={app.name} priority />
+                      </Tilt>
+                    )}
                   </Parallax>
                 </div>
               </div>
             </Reveal>
-          </div>
-        </section>
-      )}
+          ))}
+        </div>
+      </section>
 
       {/* -------- SCREENSHOT STRIP -------- */}
       <section className="section section--tight">

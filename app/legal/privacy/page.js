@@ -60,7 +60,7 @@ export default function PrivacyPage() {
           <h2>6. Contact</h2>
           <p>
             Privacy questions? Email{' '}
-            <a href="mailto:contact@ecosanskritiinnovations.co.in">contact@ecosanskritiinnovations.co.in</a>.
+            <a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a>.
           </p>
         </div>
       </section>

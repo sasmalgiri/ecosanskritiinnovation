@@ -66,7 +66,7 @@ export default function EulaPage() {
           <h2>7. Contact</h2>
           <p>
             Licensing questions? Email{' '}
-            <a href="mailto:contact@ecosanskritiinnovations.co.in">contact@ecosanskritiinnovations.co.in</a>.
+            <a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a>.
           </p>
         </div>
       </section>

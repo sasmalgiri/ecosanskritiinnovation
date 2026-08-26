@@ -33,12 +33,8 @@ export default function ContactPage() {
               <li>
                 <span className="contact__k">Email</span>
                 <span className="contact__v">
-                  <a href="mailto:contact@ecosanskritiinnovations.co.in">contact@ecosanskritiinnovations.co.in</a>
+                  <a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a>
                 </span>
-              </li>
-              <li>
-                <span className="contact__k">Founder</span>
-                <span className="contact__v"><a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a></span>
               </li>
               <li>
                 <span className="contact__k">YouTube</span>

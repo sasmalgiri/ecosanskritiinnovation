@@ -18,8 +18,8 @@ const HOME_APPS = [
   { slug: 'mailin', icon: true, name: 'mailin', monogram: 'M', platform: 'macOS · iOS', status: 'live' },
   { slug: 'antya-yuga', icon: true, name: 'Antya Yuga', monogram: 'A', platform: 'iOS · macOS', status: 'live' },
   { slug: '5s-contact-manager', icon: true, name: '5S Contact Manager', monogram: '5', platform: 'Google Sheets', status: 'live' },
-  { slug: 'kalsmritikosh', name: 'Kalsmritikosh', monogram: 'K', platform: 'macOS', status: 'soon' },
-  { slug: 'photo-ai', name: 'Photo AI', monogram: 'P', platform: 'iOS', status: 'soon' },
+  { slug: 'kalsmritikosh', icon: true, name: 'Kalsmritikosh', monogram: 'K', platform: 'macOS', status: 'soon' },
+  { slug: 'photo-ai', name: 'AI Camera Coach', monogram: 'C', platform: 'iOS 18+', status: 'soon' },
 ];
 
 const MOTOR_SHOTS = [

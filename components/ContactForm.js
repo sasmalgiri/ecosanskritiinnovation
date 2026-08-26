@@ -35,7 +35,7 @@ export default function ContactForm() {
         setStatus({ state: 'error', message: body.error || 'Something went wrong. Please email us directly instead.' });
       }
     } catch {
-      setStatus({ state: 'error', message: 'Network error. Please email us directly at contact@ecosanskritiinnovations.co.in.' });
+      setStatus({ state: 'error', message: 'Network error. Please email us directly at sasmalgiri@gmail.com.' });
     }
   }
 
@@ -86,7 +86,7 @@ export default function ContactForm() {
       </button>
 
       <p className="form__note">
-        Prefer email? Write to <a href="mailto:contact@ecosanskritiinnovations.co.in" style={{ color: 'var(--pine)' }}>contact@ecosanskritiinnovations.co.in</a>.
+        Prefer email? Write to <a href="mailto:sasmalgiri@gmail.com" style={{ color: 'var(--pine)' }}>sasmalgiri@gmail.com</a>.
       </p>
     </form>
   );

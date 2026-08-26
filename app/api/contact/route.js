@@ -35,7 +35,7 @@ export async function POST(request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || 'contact@ecosanskritiinnovations.co.in';
+  const to = process.env.CONTACT_TO_EMAIL || 'sasmalgiri@gmail.com';
   const from = process.env.CONTACT_FROM_EMAIL || 'onboarding@resend.dev';
 
   // Email isn't configured yet — tell the user plainly instead of failing silently.
@@ -43,7 +43,7 @@ export async function POST(request) {
     return NextResponse.json(
       {
         error:
-          'The contact form isn’t connected to email yet. Please write to contact@ecosanskritiinnovations.co.in for now.',
+          'The contact form isn’t connected to email yet. Please write to sasmalgiri@gmail.com for now.',
       },
       { status: 503 }
     );

@@ -1131,3 +1131,9 @@ img { max-width: 100%; display: block; }
   .gallery__cell:hover,
   .featgrid__cell:hover { transform: none; }
 }
+
+/* ---- multiple featured apps on one page ------------------ */
+.featapp { margin-bottom: clamp(1.75rem, 4vw, 3rem); }
+.featapp__phones { display: flex; gap: 1rem; justify-content: center; align-items: flex-start; }
+.featapp__phones .phone { max-width: 190px; }
+@media (max-width: 520px) { .featapp__phones .phone:nth-child(2) { display: none; } }
