@@ -35,8 +35,22 @@ export default function Footer() {
           </div>
         </div>
 
+        {/*
+          Statutory identity block. Section 12(3)(c) of the Companies Act 2013
+          requires a company to display its full registered name, registered
+          office and CIN on its business communications, and the 2014 rules
+          extend that to the website. An abbreviated "Pvt. Ltd." with no CIN
+          does not satisfy it.
+        */}
+        <div className="footer__legal">
+          <p><strong>EcoSanskriti Innovations (OPC) Private Limited</strong></p>
+          <p>CIN: U27100WB2025OPC279246</p>
+          <p>Registered office: Vill + Post Binogram, Dist. Hooghly, West Bengal 712401, India</p>
+          <p>HRIM Motor — Indian Patent No. 555489, granted 22 March 2023</p>
+        </div>
+
         <div className="footer__bar">
-          <span>© {new Date().getFullYear()} EcoSanskriti Innovations (OPC) Pvt. Ltd.</span>
+          <span>© {new Date().getFullYear()} EcoSanskriti Innovations (OPC) Private Limited. All rights reserved.</span>
           <span>sasmalgiri@gmail.com</span>
         </div>
       </div>

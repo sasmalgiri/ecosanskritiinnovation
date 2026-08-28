@@ -1,12 +1,21 @@
 import Link from 'next/link';
-import Reveal from '@/components/Reveal';
+import { LEGAL } from '@/lib/legal-content';
 
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'How EcoSanskriti Innovations handles your data.',
+  description:
+    'Privacy Policy for EcoSanskriti Innovations (OPC) Private Limited, CIN U27100WB2025OPC279246.',
 };
 
-export default function PrivacyPage() {
+/**
+ * The document body is injected as raw HTML rather than rewritten as JSX.
+ *
+ * These are the documents the published App Store listings link to, so the
+ * wording has to survive exactly. Re-authoring 130 KB of Termly markup as
+ * components would risk changing clause numbering or nesting to no benefit,
+ * and the content is static and trusted — it ships in our own repo.
+ */
+export default function Page() {
   return (
     <>
       <section className="pagehead">
@@ -17,51 +26,8 @@ export default function PrivacyPage() {
       </section>
 
       <section className="section">
-        <div className="wrap prose">
-          <div className="callout">
-            <strong>Editor’s note (remove before publishing):</strong> A starting template, not legal
-            advice. Update it to reflect exactly what you collect and which services you use (e.g.
-            Resend for the contact form, any analytics), then have it reviewed.
-          </div>
-
-          <Reveal as="p">Last updated: {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</Reveal>
-
-          <h2>1. What we collect</h2>
-          <p>
-            When you use our contact form, we collect the name, email address, and message you provide,
-            so we can reply. We don’t sell your information to anyone.
-          </p>
-
-          <h2>2. How we use it</h2>
-          <p>
-            We use the details you submit solely to respond to your enquiry and, where relevant, to
-            follow up about products or partnerships you asked about.
-          </p>
-
-          <h2>3. Third-party services</h2>
-          <p>
-            Contact-form messages are delivered through an email provider (Resend). This site is hosted
-            on Vercel, which may process basic technical request data. These providers handle data under
-            their own privacy terms.
-          </p>
-
-          <h2>4. Cookies &amp; analytics</h2>
-          <p>
-            This site uses only what’s needed to function. If you add analytics later, describe it here
-            and offer a way to opt out where required.
-          </p>
-
-          <h2>5. Your rights</h2>
-          <p>
-            You may ask us what personal data we hold about you and request its correction or deletion.
-            Email us to make a request.
-          </p>
-
-          <h2>6. Contact</h2>
-          <p>
-            Privacy questions? Email{' '}
-            <a href="mailto:sasmalgiri@gmail.com">sasmalgiri@gmail.com</a>.
-          </p>
+        <div className="wrap prose legal-doc">
+          <div dangerouslySetInnerHTML={{ __html: LEGAL.privacy }} />
         </div>
       </section>
     </>

@@ -8,6 +8,7 @@ import FluxMandala from './FluxMandala';
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/products', label: 'Products' },
+  { href: '/services', label: 'Services' },
   { href: '/founder', label: 'Founder & Team' },
   { href: '/legal/terms', label: 'Legal' },
   { href: '/contact', label: 'Contact' },
