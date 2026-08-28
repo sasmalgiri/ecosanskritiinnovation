@@ -5,6 +5,9 @@ import KineticStrip from '@/components/KineticStrip';
 import Reveal from '@/components/Reveal';
 import SplitReveal from '@/components/SplitReveal';
 import Gallery from '@/components/Gallery';
+import Counter from '@/components/Counter';
+import Marquee from '@/components/Marquee';
+import Magnetic from '@/components/Magnetic';
 import {
   IconMobility, IconCooling, IconDigital, IconUpcycle,
   IconArrow, IconCheck, IconPlay,
@@ -69,11 +72,68 @@ const HOME_WORK = [
   },
 ];
 
+const FIVERR_PROFILE = 'https://www.fiverr.com/everythingme232';
+const FIVERR_GIG =
+  'https://www.fiverr.com/everythingme232/build-a-complete-ai-platform-with-rag-search-admin-dashboard-and-api';
+
+/**
+ * The key-facts band, after Trionn's.
+ *
+ * Their version reads "50+ projects, 90% client retention". Ours says less
+ * because we have done less, and inflating it would be the one mistake this
+ * page cannot survive: every number here is checkable in under a minute by
+ * anyone who cares to, which is exactly why they are worth printing.
+ */
+const FACTS = [
+  { n: '555489', lbl: 'Indian patent, granted', mono: true },
+  { n: 2, lbl: 'Apps live on the App Store' },
+  { n: 9, suffix: '+', lbl: 'Projects shipped' },
+  { n: 5.0, decimals: 1, lbl: 'Rating on Fiverr' },
+];
+
+/**
+ * Trionn devotes a band to award marks. We have no awards, so this is the
+ * honest equivalent — the four things an outsider can independently verify,
+ * each linked to the record that proves it. A claim with a link outranks a
+ * logo without one.
+ */
+const PROOF = [
+  {
+    k: 'Patent',
+    v: 'No. 555489',
+    note: 'Granted 22 March 2023 · India',
+    href: '/patent-hrim-555489.pdf',
+  },
+  {
+    k: 'App Store',
+    v: 'mailin',
+    note: 'macOS · iOS · Live',
+    href: 'https://apps.apple.com/app/mailin/id6767245397',
+  },
+  {
+    k: 'App Store',
+    v: 'Antya Yuga',
+    note: 'iOS · macOS · Live',
+    href: 'https://apps.apple.com/app/antya-yuga/id6783359423',
+  },
+  {
+    k: 'Fiverr',
+    v: '★ 5.0',
+    note: 'Programming & Tech → AI',
+    href: FIVERR_PROFILE,
+  },
+];
+
+const SERVICE_WORDS = [
+  'AI platforms', 'RAG search', 'Swift & SwiftUI', 'Speech synthesis',
+  'Computer vision', 'Document AI', 'Next.js products', 'Electric machines',
+];
+
 export default function HomePage() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      <section className="hero">
+      <section className="hero" data-tone="dark">
         <div className="wrap hero__grid">
           <div>
             <p className="eyebrow">Deep-tech · Digital · Regenerative</p>
@@ -105,6 +165,55 @@ export default function HomePage() {
             <span>Howrah · West Bengal</span>
             <span>EcoSanskriti Innovations (OPC) Pvt. Ltd.</span>
           </div>
+        </div>
+      </section>
+
+      {/* ---------- STUDIO + KEY FACTS ---------- */}
+      {/* data-invert flips the design tokens for this whole block, and
+          ToneScroll carries the same tone onto the body as it scrolls past. */}
+      <section className="section studioband" data-invert>
+        <div className="wrap">
+          <div className="studioband__grid">
+            <Reveal>
+              <p className="eyebrow eyebrow--ink">The studio</p>
+              <SplitReveal
+                as="h2"
+                className="studioband__title"
+                text="Incorporated 2025. Building since long before."
+              />
+            </Reveal>
+            <Reveal delay={90}>
+              <p className="studioband__body">
+                EcoSanskriti Innovations is a one-person company in West Bengal that
+                designs deep-tech hardware and ships production software. A granted
+                patent in electric machines sits alongside applications on the App
+                Store and speech, vision and document pipelines running in production.
+                Small enough to answer the phone, and evidenced enough that you do not
+                have to take our word for any of it.
+              </p>
+              <div className="studioband__actions">
+                <Link href="/work" className="btn btn--ink magnet" data-cursor="view">
+                  See the work <IconArrow className="btn__arrow" width="16" height="16" />
+                </Link>
+                <Link href="/founder" className="btn btn--outline-ink">Who we are</Link>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal>
+            <div className="facts">
+              {FACTS.map((f) => (
+                <div className="fact" key={f.lbl}>
+                  <span className={'fact__n' + (f.mono ? ' fact__n--mono' : '')}>
+                    {f.mono
+                      ? f.n
+                      : <Counter to={f.n} suffix={f.suffix} decimals={f.decimals} />}
+                  </span>
+                  <span className="fact__lbl">{f.lbl}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -190,6 +299,33 @@ export default function HomePage() {
                 See all our work <IconArrow className="btn__arrow" width="16" height="16" />
               </Link>
               <Link href="/services" className="btn btn--outline-ink">We build this for others too</Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- VERIFIABLE PROOF ---------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <Reveal>
+            <p className="proof__head">Everything above, independently checkable</p>
+          </Reveal>
+          <Reveal>
+            <div className="proof">
+              {PROOF.map((x) => (
+                <a
+                  key={x.v + x.k}
+                  className="proof__item"
+                  href={x.href}
+                  target={x.href.startsWith('http') ? '_blank' : undefined}
+                  rel={x.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  data-cursor="open"
+                >
+                  <span className="proof__k">{x.k}</span>
+                  <span className="proof__v">{x.v}</span>
+                  <span className="proof__note">{x.note}</span>
+                </a>
+              ))}
             </div>
           </Reveal>
         </div>
@@ -295,6 +431,84 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ---------- WE BUILD THIS FOR OTHERS ---------- */}
+      <section className="section hireband" data-invert>
+        <div className="wrap">
+          <Reveal className="head" as="div">
+            <p className="eyebrow eyebrow--ink">Available for work</p>
+            <SplitReveal as="h2" className="head__title" text="We build this for other people too." />
+            <p className="lede">
+              The same hands behind the patent and the apps take on client work — scoped
+              and priced openly on Fiverr, where the practice is rated 5.0.
+            </p>
+          </Reveal>
+
+          <div className="hire">
+            <Reveal>
+              <article className="hire__gig">
+                <p className="hire__kicker">Featured gig</p>
+                <h3 className="hire__title">
+                  Build a complete AI platform with RAG search, admin dashboard and API
+                </h3>
+                <p className="hire__desc">
+                  Architected, developed and deployed end to end — vector search over your
+                  own data, an admin surface your team can actually use, and a documented
+                  API. Three tiers, from a working core to something hardened for
+                  production.
+                </p>
+                <ul className="hire__facts">
+                  <li><span>From</span><b>₹20,064</b></li>
+                  <li><span>Delivery</span><b>21 days</b></li>
+                  <li><span>Rating</span><b>★ 5.0</b></li>
+                  <li><span>Category</span><b>AI Development</b></li>
+                </ul>
+                <div className="hire__actions">
+                  <Magnetic>
+                    <a
+                      className="btn btn--ink"
+                      href={FIVERR_GIG}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor="open"
+                    >
+                      View the gig <IconArrow className="btn__arrow" width="16" height="16" />
+                    </a>
+                  </Magnetic>
+                  <a
+                    className="btn btn--outline-ink"
+                    href={FIVERR_PROFILE}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="open"
+                  >
+                    All our gigs
+                  </a>
+                </div>
+              </article>
+            </Reveal>
+
+            <Reveal delay={90}>
+              <div className="hire__side">
+                <p className="hire__kicker">What we take on</p>
+                <ul className="hire__list">
+                  <li><IconCheck width="18" height="18" /> AI platforms — RAG, agents, vector search</li>
+                  <li><IconCheck width="18" height="18" /> Apple apps taken through App Store review</li>
+                  <li><IconCheck width="18" height="18" /> Speech: TTS training, dubbing, ASR pipelines</li>
+                  <li><IconCheck width="18" height="18" /> Document AI — OCR, tables, structured export</li>
+                  <li><IconCheck width="18" height="18" /> Next.js products, dashboards and data tools</li>
+                  <li><IconCheck width="18" height="18" /> Electric machine design and prototyping</li>
+                </ul>
+                <Link className="hire__more" href="/services" data-cursor="view">
+                  Full services and pricing <IconArrow width="14" height="14" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <Marquee items={SERVICE_WORDS} speed={38} />
 
       {/* ---------- CTA ---------- */}
       <section className="section section--tight">

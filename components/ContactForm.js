@@ -3,6 +3,35 @@
 import { useState } from 'react';
 import { IconArrow } from './Icons';
 
+/**
+ * Trionn's enquiry form asks which service you want and what you intend to
+ * spend, before it asks anything else. That is not extra friction for its own
+ * sake — those two answers decide whether an enquiry is worth an hour or a
+ * polite decline, and asking up front saves both sides a round of email.
+ *
+ * Both are optional. A visitor who does not know their budget yet still gets
+ * to send the message; the alternative is losing enquiries to a required
+ * field nobody can answer honestly on a first visit.
+ */
+const SERVICES = [
+  'AI platform — RAG, agents, vector search',
+  'Apple app — iOS / iPadOS / macOS',
+  'Speech — TTS, dubbing, ASR pipeline',
+  'Document AI — OCR and extraction',
+  'Web platform — Next.js product or dashboard',
+  'Deep tech — electric machines / HRIM',
+  'Partnership or investment',
+  'Press or something else',
+];
+
+const BUDGETS = [
+  'Under ₹50,000',
+  '₹50,000 – ₹2,00,000',
+  '₹2,00,000 – ₹10,00,000',
+  'Over ₹10,00,000',
+  'Not sure yet',
+];
+
 export default function ContactForm() {
   const [status, setStatus] = useState({ state: 'idle', message: '' });
 
@@ -51,6 +80,33 @@ export default function ContactForm() {
         <div className="field">
           <label htmlFor="email">Email</label>
           <input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" />
+        </div>
+      </div>
+
+      <div className="form__row">
+        <div className="field">
+          <label htmlFor="service">What do you need?</label>
+          <div className="select">
+            <select id="service" name="service" defaultValue="">
+              <option value="">Select a service (optional)</option>
+              {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+        <div className="field">
+          <label htmlFor="budget">Budget range</label>
+          <div className="select">
+            <select id="budget" name="budget" defaultValue="">
+              <option value="">Select a range (optional)</option>
+              {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
+            </select>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
       </div>
 

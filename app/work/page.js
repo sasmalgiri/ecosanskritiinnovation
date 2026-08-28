@@ -159,7 +159,7 @@ export default function WorkPage() {
   return (
     <>
       {/* ── hero ─────────────────────────────────────────────── */}
-      <section className="pagehead pagehead--xl">
+      <section className="pagehead pagehead--xl" data-tone="dark">
         <div className="wrap">
           <p className="crumb"><Link href="/">Home</Link> / Work</p>
           <SplitReveal
@@ -210,9 +210,9 @@ export default function WorkPage() {
             {WORK.map((w, i) => (
               <ClipReveal key={w.name} delay={Math.min(i, 4) * 60}>
                 <Tilt max={4} className="workcard-tilt">
-                  <article className={`workcard workcard--${w.accent}`}>
+                  <article className={`workcard workcard--${w.accent}`} data-cursor={w.shot ? 'explore' : null}>
                     {w.shot && (
-                      <div className="workcard__shot">
+                      <div className="workcard__shot" data-cta={w.status === 'Patent granted' ? 'Read the patent' : w.status === 'Live on the App Store' ? 'Download it' : 'Explore project'}>
                         <img src={w.shot} alt="" loading="lazy" decoding="async" />
                         {w.icon && <img className="workcard__icon" src={w.icon} alt="" width="56" height="56" loading="lazy" />}
                       </div>

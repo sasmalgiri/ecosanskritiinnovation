@@ -90,7 +90,7 @@ const TIERS = [
 export default function ServicesPage() {
   return (
     <>
-      <section className="pagehead">
+      <section className="pagehead" data-tone="dark">
         <div className="wrap">
           <p className="crumb"><Link href="/">Home</Link> / Services</p>
           <h1 className="pagehead__title">

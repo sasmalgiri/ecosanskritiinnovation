@@ -18,7 +18,7 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <section className="pagehead">
+      <section className="pagehead" data-tone="dark">
         <div className="wrap">
           <p className="crumb"><Link href="/">Home</Link> / Legal / Privacy Policy</p>
           <h1 className="pagehead__title">Privacy Policy</h1>

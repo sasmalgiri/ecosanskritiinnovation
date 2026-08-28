@@ -21,6 +21,10 @@ export async function POST(request) {
   const email = (data.email || '').toString().trim();
   const subject = (data.subject || '').toString().trim();
   const message = (data.message || '').toString().trim();
+  // Both optional, and both capped — an unbounded string from a public form
+  // has no business being interpolated into an outgoing email.
+  const service = (data.service || '').toString().trim().slice(0, 120);
+  const budget = (data.budget || '').toString().trim().slice(0, 60);
 
   if (data.company) {
     // honeypot tripped — pretend success, send nothing
@@ -57,14 +61,22 @@ export async function POST(request) {
       from: `EcoSanskriti Website <${from}>`,
       to,
       replyTo: email,
-      subject: subject ? `[Website] ${subject}` : `[Website] New message from ${name}`,
-      text: `From: ${name} <${email}>\nSubject: ${subject || '(none)'}\n\n${message}`,
+      // The service tag in the subject line makes the inbox sortable at a
+      // glance, which matters more than the prettier phrasing without it.
+      subject: subject
+        ? `[Website] ${subject}`
+        : service
+          ? `[Website] ${service.split('—')[0].trim()} — ${name}`
+          : `[Website] New message from ${name}`,
+      text: `From: ${name} <${email}>\nSubject: ${subject || '(none)'}\nService: ${service || '(not specified)'}\nBudget: ${budget || '(not specified)'}\n\n${message}`,
       html: `
         <div style="font-family:system-ui,sans-serif;line-height:1.6;color:#16241d">
           <h2 style="margin:0 0 12px">New enquiry via ecosanskritiinnovations.co.in</h2>
           <p style="margin:0 0 6px"><strong>Name:</strong> ${escapeHtml(name)}</p>
           <p style="margin:0 0 6px"><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p style="margin:0 0 12px"><strong>Subject:</strong> ${escapeHtml(subject) || '(none)'}</p>
+          <p style="margin:0 0 6px"><strong>Subject:</strong> ${escapeHtml(subject) || '(none)'}</p>
+          <p style="margin:0 0 6px"><strong>Service:</strong> ${escapeHtml(service) || '(not specified)'}</p>
+          <p style="margin:0 0 12px"><strong>Budget:</strong> ${escapeHtml(budget) || '(not specified)'}</p>
           <div style="padding:12px 16px;background:#f6f2e9;border-left:3px solid #d8a521;border-radius:4px;white-space:pre-wrap">${escapeHtml(message)}</div>
         </div>`,
     });

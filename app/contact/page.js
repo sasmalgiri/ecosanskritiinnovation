@@ -11,7 +11,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <section className="pagehead">
+      <section className="pagehead" data-tone="dark">
         <FluxMandala animated={false} className="pagehead__mark" />
         <div className="wrap">
           <p className="crumb"><Link href="/">Home</Link> / Contact</p>

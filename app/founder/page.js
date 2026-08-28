@@ -16,7 +16,7 @@ const VALUES = [
 export default function FounderPage() {
   return (
     <>
-      <section className="pagehead">
+      <section className="pagehead" data-tone="dark">
         <FluxMandala animated={false} className="pagehead__mark" />
         <div className="wrap">
           <p className="crumb"><Link href="/">Home</Link> / Founder &amp; Team</p>

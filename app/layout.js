@@ -5,6 +5,9 @@ import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
 import SpotlightRoot from '@/components/Spotlight';
 import MagneticRoot from '@/components/Magnetic';
+import Preloader from '@/components/Preloader';
+import Cursor from '@/components/Cursor';
+import ToneScroll from '@/components/ToneScroll';
 
 const display = Fraunces({
   subsets: ['latin'],
@@ -76,11 +79,13 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body>
-        {/* Marks JS as available before paint, so scroll-reveal only hides
-            content when it can actually animate it back in. */}
-        <script
-          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
-        />
+        {/* Runs before first paint. Marks JS as available, so scroll-reveal
+            only hides content when it can animate it back in, and decides
+            whether the opening curtain should be up — see Preloader. */}
+        <script dangerouslySetInnerHTML={{ __html: "(function(){var d=document.documentElement;d.classList.add('js');try{if(location.pathname==='/'&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&sessionStorage.getItem('esi:preloaded')!=='1'){sessionStorage.setItem('esi:preloaded','1');d.classList.add('is-preloading');setTimeout(function(){d.classList.remove('is-preloading')},4500);}}catch(e){}})()" }} />
+        <Preloader />
+        <Cursor />
+        <ToneScroll />
         <ScrollProgress />
         <div className="grain" aria-hidden="true" />
         <SpotlightRoot />

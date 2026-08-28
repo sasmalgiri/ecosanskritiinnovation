@@ -138,7 +138,7 @@ export default function ProductsPage() {
 
   return (
     <>
-      <section className="pagehead">
+      <section className="pagehead" data-tone="dark">
         <FluxMandala animated={false} className="pagehead__mark" />
         <div className="wrap">
           <p className="crumb"><Link href="/" className="ulink">Home</Link> / Apps &amp; Products</p>
