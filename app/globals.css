@@ -1407,3 +1407,100 @@ img { max-width: 100%; display: block; }
   padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 0 0 30px;
 }
 .legal-doc .dpdp { margin-top: 40px; padding-top: 26px; border-top: 2px solid var(--ink); }
+
+/* ═══════════════════════════════════════════════════════════════
+   WORK — the showcase
+   Studio sites lead with oversized type and tiles that carry the
+   deliverables as tags, because a visitor scanning for capability
+   reads tags faster than prose. Every tile here also carries a link
+   to the artefact itself, which is the part a case study cannot fake.
+   ═══════════════════════════════════════════════════════════════ */
+
+.pagehead--xl { padding-bottom: 18px; }
+.worktitle {
+  font-size: clamp(44px, 11vw, 148px);
+  line-height: .92; letter-spacing: -.045em; font-weight: 800;
+  margin: 6px 0 22px; text-wrap: balance;
+}
+
+/* ── metrics ─────────────────────────────────────────────────── */
+.metrics {
+  display: grid; gap: 1px; background: var(--paper-line);
+  border: 1px solid var(--paper-line); border-radius: 16px; overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.metric { background: var(--paper); padding: 26px 18px; text-align: center; }
+.metric__num {
+  display: block; font-size: clamp(32px, 5vw, 52px); font-weight: 800;
+  letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.metric__lbl {
+  display: block; margin-top: 8px; font-size: 12.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+
+/* ── work cards ──────────────────────────────────────────────── */
+.worklist { display: grid; gap: 18px; margin-top: 34px; }
+@media (min-width: 860px) {
+  .worklist { grid-template-columns: repeat(2, 1fr); }
+  /* The first two are the App Store apps — the most verifiable claim on the
+     page, so they get the full width and the largest type. */
+  .worklist > *:nth-child(-n+2) { grid-column: 1 / -1; }
+}
+
+.workcard-tilt { height: 100%; }
+.workcard {
+  position: relative; overflow: hidden; height: 100%;
+  display: flex; flex-direction: column;
+  padding: 30px 28px; border-radius: 18px;
+  background: var(--paper); border: 1px solid var(--paper-line);
+  transition: border-color .35s, box-shadow .35s;
+}
+.workcard:hover { border-color: var(--ink); box-shadow: 0 22px 50px -26px rgba(0,0,0,.32); }
+
+/* A wash of colour that intensifies on hover — enough to differentiate the
+   cards without photography, which we do not have for every project. */
+.workcard::before {
+  content: ''; position: absolute; inset: 0 0 auto; height: 140px; opacity: .5;
+  transition: opacity .4s; pointer-events: none;
+}
+.workcard:hover::before { opacity: 1; }
+.workcard--a::before { background: linear-gradient(180deg, rgba(46,122,90,.16), transparent); }
+.workcard--b::before { background: linear-gradient(180deg, rgba(190,142,54,.16), transparent); }
+.workcard--c::before { background: linear-gradient(180deg, rgba(70,86,77,.16), transparent); }
+
+.workcard__meta {
+  display: flex; justify-content: space-between; gap: 14px;
+  font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--ink-soft); position: relative;
+}
+.workcard__name {
+  margin: 14px 0 4px; font-size: clamp(24px, 3.4vw, 40px);
+  letter-spacing: -.03em; line-height: 1.03; position: relative;
+}
+.worklist > *:nth-child(-n+2) .workcard__name { font-size: clamp(30px, 5vw, 58px); }
+
+.workcard__status {
+  margin: 0 0 12px; font-size: 13px; font-weight: 600;
+  color: var(--ink); position: relative;
+}
+.workcard__blurb { margin: 0 0 18px; color: var(--ink-soft); max-width: 62ch; position: relative; }
+
+.workcard__tags {
+  list-style: none; padding: 0; margin: 0 0 20px;
+  display: flex; flex-wrap: wrap; gap: 7px; position: relative;
+}
+.workcard__tags li {
+  font-size: 12px; padding: 5px 11px; border-radius: 999px;
+  background: var(--paper-dim); color: var(--ink-soft);
+  border: 1px solid var(--paper-line);
+}
+
+.workcard__links {
+  margin-top: auto; display: flex; gap: 18px; align-items: center;
+  flex-wrap: wrap; position: relative;
+}
+.workcard__cta { font-weight: 700; text-decoration: none; color: var(--ink); }
+.workcard__cta span { display: inline-block; transition: transform .3s cubic-bezier(.16,1,.3,1); }
+.workcard__cta:hover span { transform: translateX(5px); }
+.workcard__more { font-size: 14px; color: var(--ink-soft); }
