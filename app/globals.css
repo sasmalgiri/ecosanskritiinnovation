@@ -1504,3 +1504,96 @@ img { max-width: 100%; display: block; }
 .workcard__cta span { display: inline-block; transition: transform .3s cubic-bezier(.16,1,.3,1); }
 .workcard__cta:hover span { transform: translateX(5px); }
 .workcard__more { font-size: 14px; color: var(--ink-soft); }
+
+/* ── work card imagery ───────────────────────────────────────── */
+/* The reference studios are image-led; these are real screenshots and real
+   photographs of the motor, so they carry more weight than any illustration.
+   Fixed aspect ratio stops the grid reflowing as images load. */
+.workcard__shot {
+  position: relative; margin: -30px -28px 20px; overflow: hidden;
+  aspect-ratio: 16 / 9; background: var(--paper-dim);
+  border-bottom: 1px solid var(--paper-line);
+}
+.workcard__shot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+.workcard:hover .workcard__shot img:first-child { transform: scale(1.045); }
+
+/* App icon overlaps the image edge — the convention every app store uses,
+   and it identifies the product before the name is read. */
+.workcard__icon {
+  position: absolute; left: 24px; bottom: -22px;
+  width: 56px; height: 56px; border-radius: 14px;
+  border: 3px solid var(--paper); background: var(--paper);
+  box-shadow: 0 8px 22px -8px rgba(0,0,0,.4);
+  object-fit: cover; transform: none !important;
+}
+.workcard__shot + .workcard__meta { margin-top: 26px; }
+
+/* The two full-width cards put the image beside the text on wide screens. */
+@media (min-width: 860px) {
+  .worklist > *:nth-child(-n+2) .workcard {
+    display: grid; grid-template-columns: 1.05fr 1fr;
+    gap: 34px; align-items: center; padding: 0;
+  }
+  .worklist > *:nth-child(-n+2) .workcard__shot {
+    margin: 0; height: 100%; aspect-ratio: auto; min-height: 320px;
+    border-bottom: 0; border-right: 1px solid var(--paper-line);
+  }
+  .worklist > *:nth-child(-n+2) .workcard__icon { left: 26px; bottom: 22px; }
+  .worklist > *:nth-child(-n+2) .workcard__meta,
+  .worklist > *:nth-child(-n+2) .workcard__name,
+  .worklist > *:nth-child(-n+2) .workcard__status,
+  .worklist > *:nth-child(-n+2) .workcard__blurb,
+  .worklist > *:nth-child(-n+2) .workcard__tags,
+  .worklist > *:nth-child(-n+2) .workcard__links { grid-column: 2; margin-right: 30px; }
+  .worklist > *:nth-child(-n+2) .workcard__meta { margin-top: 30px; }
+  .worklist > *:nth-child(-n+2) .workcard__links { margin-bottom: 30px; }
+  .worklist > *:nth-child(-n+2) .workcard__shot { grid-row: 1 / -1; grid-column: 1; }
+}
+
+/* ── homepage work teaser ────────────────────────────────────── */
+/* The homepage previously dead-ended: /work and /services were reachable only
+   from the nav. These three tiles are the bridge, and they lead with the
+   image because that is what a visitor scans first. */
+.homework {
+  display: grid; gap: 16px; margin-top: 30px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .homework { grid-template-columns: repeat(3, 1fr); } }
+
+.homework__tile {
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+  border: 1px solid var(--paper-line); border-radius: 14px; overflow: hidden;
+  background: var(--paper);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
+}
+.homework__tile:hover {
+  transform: translateY(-4px); border-color: var(--pine);
+  box-shadow: 0 24px 48px -28px rgba(0,0,0,.35);
+}
+.homework__shot { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-dim); }
+.homework__shot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .8s cubic-bezier(.16,1,.3,1);
+}
+.homework__tile:hover .homework__shot img { transform: scale(1.06); }
+
+.homework__name {
+  font-family: var(--font-display); font-size: 1.35rem;
+  padding: 16px 18px 2px; letter-spacing: -.02em;
+}
+.homework__note {
+  padding: 0 18px 18px; font-size: .82rem; color: var(--ink-soft);
+  font-family: var(--font-mono); letter-spacing: .02em; line-height: 1.5;
+}
+.homework__more { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .homework__tile, .homework__shot img,
+  .workcard__shot img { transition: none; }
+  .homework__tile:hover { transform: none; }
+  .homework__tile:hover .homework__shot img,
+  .workcard:hover .workcard__shot img:first-child { transform: none; }
+}

@@ -2,7 +2,7 @@ const SITE = 'https://ecosanskritiinnovations.co.in';
 
 export default function sitemap() {
   const routes = [
-    '', '/products',
+    '', '/work', '/services', '/products',
     '/products/mailin', '/products/antya-yuga', '/products/5s-contact-manager',
     '/products/kalsmritikosh', '/products/photo-ai', '/founder', '/contact',
     '/legal/terms', '/legal/privacy', '/legal/eula',
@@ -12,6 +12,12 @@ export default function sitemap() {
     url: `${SITE}${path}`,
     lastModified: now,
     changeFrequency: 'monthly',
-    priority: path === '' ? 1 : 0.7,
+    // /work and /services carry the commercial intent, so they rank just under
+    // the homepage rather than level with a legal page.
+    priority:
+      path === '' ? 1
+      : path === '/work' || path === '/services' ? 0.9
+      : path.startsWith('/legal') ? 0.4
+      : 0.7,
   }));
 }

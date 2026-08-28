@@ -107,7 +107,7 @@ export default function ServicesPage() {
                 Start a project on Fiverr
               </a>
             </Magnetic>
-            <Link className="btn" href="/contact">Talk to us directly</Link>
+            <Link className="btn btn--ghost" href="/contact">Talk to us directly</Link>
           </div>
           <p className="micro">
             ★★★★★ 5.0 on Fiverr · Programming &amp; Tech → AI Development
@@ -153,7 +153,7 @@ export default function ServicesPage() {
                 <p className="tier__days">{t.days}</p>
                 <p className="tier__what">{t.what}</p>
                 <p className="tier__for">{t.for}</p>
-                <a className="btn btn--ghost" href={GIG} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn--outline-ink" href={GIG} target="_blank" rel="noopener noreferrer">
                   View on Fiverr
                 </a>
               </article>
@@ -179,7 +179,7 @@ export default function ServicesPage() {
                 See all our gigs
               </a>
             </Magnetic>
-            <Link className="btn" href="/contact">Email us instead</Link>
+            <Link className="btn btn--outline-ink" href="/contact">Email us instead</Link>
           </div>
         </div>
       </section>

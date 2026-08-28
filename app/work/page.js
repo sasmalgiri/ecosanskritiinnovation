@@ -34,6 +34,8 @@ const FIVERR = 'https://www.fiverr.com/everythingme232';
 const WORK = [
   {
     name: 'mailin',
+    shot: '/app-shots/mailin/hero.webp',
+    icon: '/app-icons/mailin.webp',
     kind: 'Product · Apple platforms',
     year: '2026',
     status: 'Live on the App Store',
@@ -46,6 +48,8 @@ const WORK = [
   },
   {
     name: 'Antya Yuga',
+    shot: '/app-shots/antya-yuga/kalifight.webp',
+    icon: '/app-icons/antya-yuga.webp',
     kind: 'Product · Game',
     year: '2026',
     status: 'Live on the App Store',
@@ -58,18 +62,21 @@ const WORK = [
   },
   {
     name: 'HRIM Motor',
+    shot: '/motor/motor-03.webp',
     kind: 'Deep tech · Hardware',
     year: '2023',
     status: 'Patent granted',
     blurb:
       'A hybrid reluctance induction motor that uses all of its magnetic flux, recovers energy while running, and cools itself without a fan.',
     tags: ['Electric machines', 'Patent 555489', 'EV', 'Industrial'],
-    href: '/assets/hrim-patent.pdf',
+    href: '/patent-hrim-555489.pdf',
     internal: '/#hrim',
     accent: 'c',
   },
   {
     name: 'Kalsmritikosh',
+    shot: '/app-shots/kalsmritikosh/timeline.webp',
+    icon: '/app-icons/kalsmritikosh.webp',
     kind: 'Product · Knowledge OS',
     year: '2026',
     status: 'In development',
@@ -204,6 +211,12 @@ export default function WorkPage() {
               <ClipReveal key={w.name} delay={Math.min(i, 4) * 60}>
                 <Tilt max={4} className="workcard-tilt">
                   <article className={`workcard workcard--${w.accent}`}>
+                    {w.shot && (
+                      <div className="workcard__shot">
+                        <img src={w.shot} alt="" loading="lazy" decoding="async" />
+                        {w.icon && <img className="workcard__icon" src={w.icon} alt="" width="56" height="56" loading="lazy" />}
+                      </div>
+                    )}
                     <div className="workcard__meta">
                       <span className="workcard__kind">{w.kind}</span>
                       <span className="workcard__year">{w.year}</span>
@@ -254,7 +267,7 @@ export default function WorkPage() {
             <Magnetic>
               <Link className="btn btn--gold" href="/services">See what we offer</Link>
             </Magnetic>
-            <a className="btn" href={FIVERR} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn--outline-ink" href={FIVERR} target="_blank" rel="noopener noreferrer">
               Our Fiverr profile
             </a>
           </div>

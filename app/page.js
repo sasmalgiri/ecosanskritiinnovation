@@ -40,6 +40,35 @@ const MOTOR_SHOTS = [
     { src: '/motor/motor-12.webp', alt: 'HRIM motor prototype in the workshop — view 12' },
 ];
 
+/**
+ * Three tiles that stand in for the whole of /work.
+ *
+ * The reference studios all lead the homepage with work rather than with a
+ * description of themselves, because a visitor decides whether to keep reading
+ * from the first thing they can verify. These three are the most verifiable we
+ * have: two apps anyone can download and a patent anyone can read.
+ */
+const HOME_WORK = [
+  {
+    href: '/work',
+    shot: '/app-shots/mailin/hero.webp',
+    name: 'mailin',
+    note: 'Forensic email analysis · Live on the App Store',
+  },
+  {
+    href: '/work',
+    shot: '/app-shots/antya-yuga/kalifight.webp',
+    name: 'Antya Yuga',
+    note: 'Tower defence on Indian itihāsa · Live on the App Store',
+  },
+  {
+    href: '/work',
+    shot: '/motor/motor-05.webp',
+    name: 'HRIM Motor',
+    note: 'Indian Patent 555489 · Granted',
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -125,6 +154,42 @@ export default function HomePage() {
                   <span className="appstrip__plat">{a.platform}{a.status === 'soon' ? ' · Soon' : ''}</span>
                 </Link>
               ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- SELECTED WORK ---------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <Reveal className="head" as="div">
+            <p className="eyebrow eyebrow--ink">Selected work</p>
+            <SplitReveal as="h2" className="head__title" text="Shipped, not pitched." />
+            <p className="lede">
+              A granted patent, two applications live on the App Store, and speech, vision
+              and document pipelines running in production — each one linked to the thing
+              itself.
+            </p>
+          </Reveal>
+          <Reveal>
+            <div className="homework">
+              {HOME_WORK.map((w) => (
+                <Link key={w.name} href={w.href} className="homework__tile">
+                  <span className="homework__shot">
+                    <img src={w.shot} alt="" loading="lazy" decoding="async" />
+                  </span>
+                  <span className="homework__name">{w.name}</span>
+                  <span className="homework__note">{w.note}</span>
+                </Link>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className="homework__more">
+              <Link href="/work" className="btn btn--ink magnet">
+                See all our work <IconArrow className="btn__arrow" width="16" height="16" />
+              </Link>
+              <Link href="/services" className="btn btn--outline-ink">We build this for others too</Link>
             </div>
           </Reveal>
         </div>
@@ -243,7 +308,8 @@ export default function HomePage() {
                 investor, or student, there’s a place for you at EcoSanskriti Innovations.
               </p>
               <div className="cta__actions">
-                <Link href="/products" className="btn btn--gold magnet">Explore projects</Link>
+                <Link href="/work" className="btn btn--gold magnet">See our work</Link>
+                <Link href="/services" className="btn btn--ghost">Build with us</Link>
                 <Link href="/contact" className="btn btn--ghost">Contact us</Link>
               </div>
             </div>
